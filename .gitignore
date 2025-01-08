@@ -1,5 +1,5 @@
 .env
 node_modules
-results
-assets/voices
+results/*.mp4
+assets/voices/*.ogg
 *.txt
