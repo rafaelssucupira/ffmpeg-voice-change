@@ -41,7 +41,7 @@ bot.on('message', async (msg) => {
     const chatID = msg.chat.id
 
     if( !msg.voice ) {
-            bot.sendMessage( chatID, "Processamos apenas audio! 😁" )
+        bot.sendMessage( chatID, "Processamos apenas audio! 😁" )
         return
     }
 
