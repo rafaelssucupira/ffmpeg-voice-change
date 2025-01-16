@@ -1,6 +1,6 @@
 .env
 node_modules
-*.mp4
+output/*.mp4
 *.ogg
 *.txt
 *.sh
