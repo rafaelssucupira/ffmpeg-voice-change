@@ -10,16 +10,16 @@ const bot = new TelegramBot( process.env.BOT_TOKEM, { polling: true } );
 async function sendMedia(chatID, fileAudio)
     {
         const date      = new Date();
-        const filename  = `${date.getFullYear()}${date.getMonth()}${date.getDay()}${date.getHours()}${date.getMinutes()}`
+        const filename  = `${date.getFullYear()}${date.getMonth()}${date.getDay()}${date.getHours()}${date.getMinutes()}${date.getSeconds()}`
         const options   = [
-            '-i', './assets/base.mp4',
+            '-i', './input/base.mp4',
             '-i', fileAudio,
             '-c:v', 'copy', // Copiar o vídeo sem reencodificação
-            '-c:a', 'libmp3lame', // Codec de áudio
+            '-c:a', 'aac', // Codec de áudio
             '-map', '0:v:0', // Mapear o vídeo do primeiro arquivo de entrada
             '-map', '1:a:0', // Mapear o áudio do segundo arquivo de entrada
             '-shortest', // Duração do vídeo igual ao áudio
-            `./results/${filename}.mp4`
+            `./output/${filename}.mp4`
         ];
 
         const listener = spawn( "ffmpeg", options )
@@ -29,7 +29,7 @@ async function sendMedia(chatID, fileAudio)
         } )
 
         listener.on( "close", async () => {
-            await bot.sendVideo( chatID, `./results/${filename}.mp4`)
+            await bot.sendVideo( chatID, `./output/${filename}.mp4`)
         })
     }
 
@@ -46,10 +46,10 @@ bot.on('message', async (msg) => {
     }
 
 
-    await bot.sendAnimation(chatID, "./assets/lina-poe-lalafell.gif")
+    await bot.sendAnimation(chatID, "./input/lina-poe-lalafell.gif")
 
     const fileStream    = bot.getFileStream( fileID );
-    const filePath      = join(__dirname, 'assets', 'voices', `${fileID}.ogg`);
+    const filePath      = join(__dirname, 'input', 'voices', `${fileID}.ogg`);
     const writeStream   = createWriteStream( filePath );
 
     fileStream
