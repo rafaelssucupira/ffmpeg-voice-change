@@ -3,4 +3,4 @@ node_modules
 output/*.mp4
 *.ogg
 *.txt
-*.sh
+*.ssh
